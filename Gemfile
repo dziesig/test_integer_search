@@ -54,3 +54,7 @@ gem "hobo_bootstrap", "2.1.1"
 gem "hobo_jquery_ui", "2.1.1"
 gem "hobo_bootstrap_ui", "2.1.1"
 gem "jquery-ui-themes", "~> 0.0.4"
+
+# Use the second line for testing table_plus_index
+gem "table_plus_index", :git => 'https://github.com/dziesig/table_plus_index.git'
+# gem "table_plus_index", :path => '/home/donz/Desktop/Hobo/table_plus_index'

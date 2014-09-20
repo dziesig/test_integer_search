@@ -25,6 +25,10 @@ TestIntegerSearch::Application.routes.draw do
   get 'forgot_password(.:format)' => 'users#forgot_password', :as => 'user_forgot_password'
   post 'forgot_password(.:format)' => 'users#forgot_password', :as => 'user_forgot_password_post'
 
+
+  # Resource routes for controller members
+  resources :members
+
   namespace :concerns do
 
   end

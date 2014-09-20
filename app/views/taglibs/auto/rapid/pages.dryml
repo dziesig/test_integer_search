@@ -6,8 +6,121 @@
 <def tag="main-nav">
   <navigation class="main-nav" merge-attrs param="default">
     <nav-item href="#{base_url}/">Home</nav-item>
+    <nav-item with="&Member"><ht key="member.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
   </navigation>
 </def>
+
+
+
+
+<!-- ====== Member Pages ====== -->
+
+<def tag="index-page" for="Member">
+  <page merge title="#{ht 'member.index.title', :default=>[model.model_name.human(:count=>100)] }">
+    <body: class="index-page member" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="member.index.heading">
+          <model-name-human model="&model"/>
+        </ht>
+      </h2>
+
+      <p param="count" if>
+        <ht key="member.collection.count" count="&collection_count">
+          <count summary/>
+        </ht>
+      </p>
+    </content-header:>
+
+    <content-body: param>
+      <a action="new" to="&model" param="new-link">
+        <ht key="member.actions.new">New Member</ht>
+      </a>
+
+      <page-nav param="top-page-nav"/>
+
+      <collection param/>
+
+      <page-nav param="bottom-page-nav"/>
+
+
+    </content-body:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Member">
+  <page merge title="#{ht 'member.new.title', :default=>[' New Member'] }">
+    <body: class="new-page member" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="member.new.heading">
+          New Member
+        </ht>
+      </h2>
+    </content-header:>
+
+    <content-body: param>
+      <form param>
+        <submit: label="#{ht 'member.actions.create', :default=>['Create Member']}"/>
+      </form>
+    </content-body:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Member">
+  <page merge title="#{ht 'member.show.title', :default=>['Member'], :name => name(:no_wrapper => true) }" without-aside >
+
+    <body: class="show-page member" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="member.show.heading" name="#{name(:no_wrapper => true)}">
+          Member <name/>
+        </ht>
+      </h2>
+
+      <record-flags fields="" param/>
+
+      <a action="edit" if="&can_edit?" param="edit-link">
+        <ht key="member.actions.edit" name="#{name(:no_wrapper => true)}">
+          Edit Member
+        </ht>
+      </a>
+    </content-header:>
+
+    <content-body: param>
+      <field-list fields="rank" param/>
+    </content-body:>
+
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Member">
+  <page merge title="#{ht 'member.edit.title', :default=>['Edit Member'], :name => name(:no_wrapper => true) }">
+
+    <body: class="edit-page member" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="member.edit.heading" name="#{name(:no_wrapper => true)}">
+          Edit Member
+        </ht>
+      </h2>
+      <delete-button label="#{ht 'member.actions.delete', :default=>['Remove This Member']}" param/>
+    </content-header:>
+
+    <content-body: param>
+      <form param/>
+    </content-body:>
+
+  </page>
+</def>
+
 
 
 
@@ -86,7 +199,7 @@
         </ht>
       </h2>
 
-      <record-flags fields="" param/>
+      <record-flags fields="administrator" param/>
 
       <a action="edit" if="&can_edit?" param="edit-link">
         <ht key="user.actions.edit" name="#{name(:no_wrapper => true)}">
@@ -96,6 +209,7 @@
     </content-header:>
 
     <content-body: param>
+      <field-list fields="email_address, state" param/>
     </content-body:>
 
   </page>

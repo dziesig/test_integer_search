@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140920011317) do
+ActiveRecord::Schema.define(version: 20140920013159) do
+
+  create_table "members", force: true do |t|
+    t.string   "name"
+    t.integer  "rank"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "crypted_password",          limit: 40
